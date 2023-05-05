@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import step1pic from "../images/step1pic.png";
 import step2pic from "../images/step2pic.png";
@@ -7,10 +7,9 @@ import step3pic from "../images/step3pic.png";
 import step4pic from "../images/step4pic.png";
 import step5pic from "../images/step5pic.png";
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
+import "swiper/css/scrollbar";
 // import required modules
-import { Pagination, Autoplay } from "swiper";
+import { Scrollbar } from "swiper";
 
 const SplashScreen = () => {
   // function to trigger swiping
@@ -58,20 +57,23 @@ const SplashScreen = () => {
   ];
   return (
     <div className=" w-[90%]  mx-auto h-screen">
-      <p className="text-end cursor-pointer  p-4 " onClick={handleGetStarted}>
-        Skip
-      </p>
+      <div className="flex justify-end">
+        <Link
+          to="/signup"
+          className="text-end cursor-pointer  p-4 "
+          onClick={handleGetStarted}
+        >
+          Skip
+        </Link>
+      </div>
       <div>
         <Swiper
-          pagination={{
-            clickable: true,
-          }}
           loop={true}
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
+          scrollbar={{
+            draggable: true,
+            hide: false,
           }}
-          modules={[Pagination, Autoplay]}
+          modules={[Scrollbar]}
           className="flex justify-center py-8 items-center swiper-container"
         >
           {steps.map((step) => (
@@ -82,19 +84,33 @@ const SplashScreen = () => {
               <div className="flex flex-col    items-center justify-center gap-12">
                 <img src={step.image} alt="step" />
                 <h1 className="text-2xl font-bold">{step.title}</h1>
-                <p className="text-center text-[#333333] text-[14px] leading-[24px]">{step.description}</p>
-                <button
-                  onClick={
-                    step.buttonName === "Get Started" ? handleGetStarted : swipe
-                  }
-                  className="bg-[#8067AD] flex justify-center h-[40px] items-center  text-white w-[296px] p-4 mx-auto rounded-md mt-4"
-                  style={{
-                    boxShadow: "0px 8px 16px rgba(128, 103, 173, 0.65)",
-                    borderRadius: "29px",
-                  }}
-                >
-                  {step.buttonName}
-                </button>
+                <p className="text-center text-[#333333] text-[14px] leading-[24px]">
+                  {step.description}
+                </p>
+                {step.buttonName === "Next" && (
+                  <button
+                    onClick={swipe}
+                    className="bg-[#8067AD] flex justify-center h-[40px] items-center  text-white w-[296px] p-4 mx-auto rounded-md mt-4"
+                    style={{
+                      boxShadow: "0px 8px 16px rgba(128, 103, 173, 0.65)",
+                      borderRadius: "29px",
+                    }}
+                  >
+                    {step.buttonName}
+                  </button>
+                )}
+                {step.buttonName === "Get Started" && (
+                  <Link
+                    to="/signup"
+                    className="bg-[#8067AD] flex justify-center h-[40px] items-center  text-white w-[296px] p-4 mx-auto rounded-md mt-4"
+                    style={{
+                      boxShadow: "0px 8px 16px rgba(128, 103, 173, 0.65)",
+                      borderRadius: "29px",
+                    }}
+                  >
+                    {step.buttonName}
+                  </Link>
+                )}
               </div>
             </SwiperSlide>
           ))}
