@@ -7,9 +7,9 @@ import step3pic from "../images/step3pic.png";
 import step4pic from "../images/step4pic.png";
 import step5pic from "../images/step5pic.png";
 import "swiper/css";
-import "swiper/css/scrollbar";
+import "swiper/css/pagination";
 // import required modules
-import { Scrollbar } from "swiper";
+import { Pagination } from "swiper";
 
 const SplashScreen = () => {
   // function to trigger swiping
@@ -17,10 +17,6 @@ const SplashScreen = () => {
   const swipe = () => {
     const swiper = document.querySelector(".swiper-container").swiper;
     swiper.slideNext();
-  };
-
-  const handleGetStarted = () => {
-    alert("Get started");
   };
 
   const steps = [
@@ -56,30 +52,25 @@ const SplashScreen = () => {
     },
   ];
   return (
-    <div className=" w-[90%]  mx-auto h-screen">
+    <div className=" w-[90%]  mx-auto ">
       <div className="flex justify-end">
-        <Link
-          to="/signup"
-          className="text-end cursor-pointer  p-4 "
-          onClick={handleGetStarted}
-        >
+        <Link to="/signup" className="text-end cursor-pointer  p-4 ">
           Skip
         </Link>
       </div>
       <div>
         <Swiper
           loop={true}
-          scrollbar={{
-            draggable: true,
-            hide: false,
+          pagination={{
+            clickable: true,
           }}
-          modules={[Scrollbar]}
+          modules={[Pagination]}
           className="flex justify-center py-8 items-center swiper-container"
         >
           {steps.map((step) => (
             <SwiperSlide
               key={step.title}
-              className="flex items-center justify-center h-[100vh]"
+              className="flex items-center justify-center "
             >
               <div className="flex flex-col    items-center justify-center gap-12">
                 <img src={step.image} alt="step" />
