@@ -173,7 +173,7 @@ const SignUp = () => {
           borderRadius: "29px",
         }}
       >
-        Login
+        Sign Up
       </button>
     </div>
   );
